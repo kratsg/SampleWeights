@@ -37,42 +37,108 @@ import re
 import fnmatch
 import math
 
-try:
-  # Set up ROOT
-  import ROOT
-except ImportError:
-  logger.exception("You must set up ROOT first with PyROOT bindings.")
+did_regex = re.compile('(\d{6,8})')
+def get_did(filename):
+  m = did_regex.search(filename)
+  if m is None:
+    raise ValueError("{0:s} is not a valid filename. Could not get did.".format(filename))
+  return m.groups()[0]
 
-try:
-  # get PyAMI
-  import pyAMI.client
-  import pyAMI.atlas.api as api
-except ImportError:
-  logger.exception("You must set up PyAMI first. localSetupPyAMI will do the trick. Make sure you have a valid certificate (voms-proxy-init -voms atlas) or run `ami auth` to log in.")
+generatorTag_regex = re.compile('\.?(e\d{4})_?')
+def get_generator_tag(filename):
+  m = generatorTag_regex.search(filename)
+  if m is None:
+    raise ValueError("{0:s} is not a valid filename. Could not get generator tag.".format(filename))
+  return m.groups()[0]
 
-# INIT ATLAS API
-api.init()
+def get_info(pattern, fields='files.cross_section,files.gen_filt_eff,nfiles'):
+  global api
+  resDict = api.list_datasets(client, patterns = pattern, fields = fields)
 
-# INSTANTIATE THE PYAMI CLIENT FOR ATLAS
-client = pyAMI.client.Client('atlas')
-
-# search for EVNT file
-pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
-fields = 'files.cross_section,files.gen_filt_eff,nfiles'
-resDict = api.list_datasets(client, patterns = pattern, fields = fields)
-
-# loop over files in dataset, calculate avg filter efficiency
-numFiles = 0
-avgFiltEff = 0.0
-avgXSec = 0.0
-for results in resDict:
+  # loop over files in dataset, calculate avg filter efficiency
+  numFiles = 0
+  avgFiltEff = 0.0
+  avgXSec = 0.0
+  for results in resDict:
     numFiles = (float)(results['nfiles'])
     if (results['files_gen_filt_eff'] != 'NULL'): avgFiltEff += (float) (results['files_gen_filt_eff'])
     if (results['files_cross_section'] != 'NULL'): avgXSec += (float) (results['files_cross_section'])
     pass # end loop over files
 
-if(numFiles != 0):
+  if(numFiles != 0):
     avgFiltEff = avgFiltEff/numFiles
     avgXSec = avgXSec/numFiles
 
-logger.info("{0:s} : avg. xsec = {1:0.2f} pb,  avg. filter eff = {2:0.2f}".format(pattern, (avgXSec*1000), avgFiltEff))
+  return avgXSec, avgFiltEff
+
+
+if __name__ == "__main__":
+  class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter):
+    pass
+
+  __version__ = subprocess.check_output(["git", "describe", "--always"], cwd=os.path.dirname(os.path.realpath(__file__))).strip()
+  __short_hash__ = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=os.path.dirname(os.path.realpath(__file__))).strip()
+
+  parser = argparse.ArgumentParser(description='Author: Giordon Stark. v.{0}'.format(__version__),
+                                   formatter_class=lambda prog: CustomFormatter(prog, max_help_position=30))
+
+  parser.add_argument('-v','--verbose', dest='verbose', action='count', default=0, help='Enable verbose output of various levels. Use --debug to enable output for debugging.')
+  parser.add_argument('--debug', dest='debug', action='store_true', help='Enable ROOT output and full-on debugging. Use this if you need to debug the application.')
+  parser.add_argument('-b', '--batch', dest='batch_mode', action='store_true', help='Enable batch mode for ROOT.')
+
+  parser.add_argument('--inputDAODs', required=True, type=str, metavar='filelist', help='a text file containing a list of DAODs used')
+
+  # parse the arguments, throw errors if missing any
+  args = parser.parse_args()
+
+  try:
+    # Set up ROOT
+    import ROOT
+  except ImportError:
+    logger.exception("You must set up ROOT first with PyROOT bindings.")
+
+  try:
+    # get PyAMI
+    import pyAMI.client
+    import pyAMI.atlas.api as api
+  except ImportError:
+    logger.exception("You must set up PyAMI first. localSetupPyAMI will do the trick. Make sure you have a valid certificate (voms-proxy-init -voms atlas) or run `ami auth` to log in.")
+
+  # INIT ATLAS API
+  api.init()
+  # INSTANTIATE THE PYAMI CLIENT FOR ATLAS
+  client = pyAMI.client.Client('atlas')
+
+  try:
+    # start execution of actual program
+    import timing
+
+    # set verbosity for python printing
+    if args.verbose < 5:
+      logger.setLevel(25 - args.verbose*5)
+    else:
+      logger.setLevel(logging.NOTSET + 1)
+
+    with tempfile.NamedTemporaryFile() as tmpFile:
+      if not args.debug:
+        ROOT.gSystem.RedirectOutput(tmpFile.name, "w")
+
+      # if flag is shown, set batch_mode to true, else false
+      ROOT.gROOT.SetBatch(args.batch_mode)
+
+
+    # search for EVNT file
+    pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
+    avgXSec, avgFiltEff = get_info(pattern)
+    logger.info("{0:s}_{1:s} : avg. xsec = {2:0.2f} pb,  avg. filter eff = {3:0.2f}".format(get_did(pattern), get_generator_tag(pattern), (avgXSec*1000), avgFiltEff))
+
+    if not args.debug:
+      ROOT.gROOT.ProcessLine("gSystem->RedirectOutput(0);")
+
+  except Exception, e:
+    # stop redirecting if we crash as well
+    if not args.debug:
+      ROOT.gROOT.ProcessLine("gSystem->RedirectOutput(0);")
+
+    logger.exception("{0}\nAn exception was caught!".format("-"*20))
+
