@@ -1,0 +1,36 @@
+Universe = vanilla
+Executable = condor.sh
+Error = out/error.$(Cluster)-$(Process)
+Output = out/output.$(Cluster)-$(Process)
+Log = out/log.$(Cluster)-$(Process)
++ProjectName="atlas-org-uchicago"
+should_transfer_files = YES
+when_to_transfer_output = ON_Exit
+transfer_output         = True
+transfer_output_files   = weights
+environment             = "X509_USER_PROXY_FILENAME=x509up_u20143"
+
+transfer_input_files = dijets.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) dijets.list
+Queue 1
+transfer_input_files = gbb.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) gbb.list
+Queue 1
+transfer_input_files = gtt.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) gtt.list
+Queue 1
+transfer_input_files = singletop.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) singletop.list
+Queue 1
+transfer_input_files = topew.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) topew.list
+Queue 1
+transfer_input_files = ttbar.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) ttbar.list
+Queue 1
+transfer_input_files = wjets.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) wjets.list
+Queue 1
+transfer_input_files = zjets.list, /tmp/x509up_u20143, weights.py, timing.py
+Arguments = $(Process) zjets.list
+Queue 1

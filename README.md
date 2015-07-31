@@ -17,14 +17,14 @@ We need:
 To run,
 
 ```
-python weights.py --inputDAODs data.list
 python weights.py --inputDAODs dijets.list
 python weights.py --inputDAODs gbb.list
 python weights.py --inputDAODs gtt.list
 python weights.py --inputDAODs singletop.list
 python weights.py --inputDAODs topew.list
 python weights.py --inputDAODs ttbar.list
-python weights.py --inputDAODs weights.py
 python weights.py --inputDAODs wjets.list
 python weights.py --inputDAODs zjets.list
 ```
+
+To use condor, edit the `condor_config` file to make sure the right X509 proxy is being used (set up your proxy via `voms-proxy-init -voms atlas` if you haven't). The rest should take care of itself since we create a job for each of the lists above.
