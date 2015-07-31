@@ -26,6 +26,11 @@ root_logger.addHandler(logging.StreamHandler(STDOUT))
 logger = logging.getLogger("weights")
 logger.setLevel(20)
 
+
+if not sys.version_info[:2] == (2, 7):
+  logger.error("You must use python 2.7.")
+  sys.exit(0)
+
 # import all libraries
 import argparse
 import subprocess
@@ -71,7 +76,6 @@ def get_info(pattern, fields='files.cross_section,files.gen_filt_eff,nfiles'):
 
   return avgXSec, avgFiltEff
 
-
 if __name__ == "__main__":
   class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter):
     pass
@@ -96,6 +100,7 @@ if __name__ == "__main__":
     import ROOT
   except ImportError:
     logger.exception("You must set up ROOT first with PyROOT bindings.")
+    sys.exit(0)
 
   try:
     # get PyAMI
@@ -103,6 +108,7 @@ if __name__ == "__main__":
     import pyAMI.atlas.api as api
   except ImportError:
     logger.exception("You must set up PyAMI first. localSetupPyAMI will do the trick. Make sure you have a valid certificate (voms-proxy-init -voms atlas) or run `ami auth` to log in.")
+    sys.exit(0)
 
   # INIT ATLAS API
   api.init()
@@ -126,11 +132,30 @@ if __name__ == "__main__":
       # if flag is shown, set batch_mode to true, else false
       ROOT.gROOT.SetBatch(args.batch_mode)
 
+    wdict = {}
 
-    # search for EVNT file
-    pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
-    avgXSec, avgFiltEff = get_info(pattern)
-    logger.info("{0:s}_{1:s} : avg. xsec = {2:0.2f} pb,  avg. filter eff = {3:0.2f}".format(get_did(pattern), get_generator_tag(pattern), (avgXSec*1000), avgFiltEff))
+    samplePattern = re.compile(".*:(.*)\.(e\d{4})_.*")
+    with open(args.inputDAODs, 'r') as f:
+      for line in f:
+        if line.startswith('#'): continue
+        try:
+          res = subprocess.check_output(['dq2-ls', line.rstrip()]).split()
+        except subprocess.CalledProcessError:
+          logger.exception("dq2 is probably not set up. We use it to find your files (using patterns) before using pyami")
+          sys.exit(0)
+
+        for sample in res:
+          logger.info()
+          matches = samplePattern.search(sample)
+          if matches is None:
+            logger.error("Could not parse {0:s}. Skipping it.".format(sample))
+            continue
+          sample_name, generator_tag = matches.groups()
+          evnt_file_name = '.'.join(sample_name.split('.')[:-2] + ['evgen', 'EVNT', generator_tag])
+          # search for EVNT file
+          #pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
+          avgXSec, avgFiltEff = get_info(event_file_name)
+          logger.info("{0:s}_{1:s} : avg. xsec = {2:0.2f} pb,  avg. filter eff = {3:0.2f}".format(get_did(pattern), get_generator_tag(pattern), (avgXSec*1000), avgFiltEff))
 
     if not args.debug:
       ROOT.gROOT.ProcessLine("gSystem->RedirectOutput(0);")

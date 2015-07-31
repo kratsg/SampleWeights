@@ -1,13 +1,15 @@
 To set up,
 
 ```
+localSetupFAX
 localSetupPyAMI
 localSetupROOT
+voms-proxy-init -voms atlas
 python weights.py
 ```
 
-and should output something like
+We need:
 
-```
-mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964 : avg. xsec = 694.44 pb,  avg. filter eff = 0.46
-```
+- FAX: use `dq2-ls` to expand out all samples for a given pattern and loop over to get their provenance
+- PyAMI: given a provenance dataset, get the filter efficiency and cross section
+- PyROOT: open up the mini-xAODs via `TFile::Open()` and `xrd` to get the cut flow histograms for number events.
