@@ -170,7 +170,10 @@ if __name__ == "__main__":
           wdict[did][gen_tag]['cross section'] = avgXSec*1000
           wdict[did][gen_tag]['filter efficiency'] = avgFiltEff
 
-    with open('{0:s}.json'.format(args.inputDAODs.split('.')[0]), 'w+') as f:
+    if not os.path.exists('weights'):
+      os.makedirs('weights')
+
+    with open('weights/{0:s}.json'.format(args.inputDAODs.split('.')[0]), 'w+') as f:
       f.write(json.dumps(wdict, sort_keys=True, indent=4))
 
     if not args.debug:
