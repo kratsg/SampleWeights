@@ -145,17 +145,21 @@ if __name__ == "__main__":
           sys.exit(0)
 
         for sample in res:
-          logger.info()
+          logger.info("Processing: {0:s}".format(sample))
+          did = get_did(sample)
+          gen_tag = get_generator_tag(sample)
+          logger.info("\tDID: {0:s}\n\tGen: {1:s}".format(did, gen_tag))
           matches = samplePattern.search(sample)
           if matches is None:
-            logger.error("Could not parse {0:s}. Skipping it.".format(sample))
+            logger.error("\tCould not parse {0:s}. Skipping it.".format(sample))
             continue
           sample_name, generator_tag = matches.groups()
           evnt_file_name = '.'.join(sample_name.split('.')[:-2] + ['evgen', 'EVNT', generator_tag])
+          logger.info("\tEVNT file: {0:s}".format(evnt_file_name))
           # search for EVNT file
           #pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
-          avgXSec, avgFiltEff = get_info(event_file_name)
-          logger.info("{0:s}_{1:s} : avg. xsec = {2:0.2f} pb,  avg. filter eff = {3:0.2f}".format(get_did(pattern), get_generator_tag(pattern), (avgXSec*1000), avgFiltEff))
+          avgXSec, avgFiltEff = get_info(evnt_file_name)
+          logger.info("\tavg. xsec = {0:0.6f} pb\n\tavg. filter eff = {1:0.6f}".format((avgXSec*1000), avgFiltEff))
 
     if not args.debug:
       ROOT.gROOT.ProcessLine("gSystem->RedirectOutput(0);")
