@@ -17,14 +17,14 @@ We need:
 To run,
 
 ```
-python --inputDAODs data.list
-python --inputDAODs dijets.list
-python --inputDAODs gbb.list
-python --inputDAODs gtt.list
-python --inputDAODs singletop.list
-python --inputDAODs topew.list
-python --inputDAODs ttbar.list
-python --inputDAODs weights.py
-python --inputDAODs wjets.list
-python --inputDAODs zjets.list
+python weights.py --inputDAODs data.list
+python weights.py --inputDAODs dijets.list
+python weights.py --inputDAODs gbb.list
+python weights.py --inputDAODs gtt.list
+python weights.py --inputDAODs singletop.list
+python weights.py --inputDAODs topew.list
+python weights.py --inputDAODs ttbar.list
+python weights.py --inputDAODs weights.py
+python weights.py --inputDAODs wjets.list
+python weights.py --inputDAODs zjets.list
 ```
