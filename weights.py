@@ -41,6 +41,7 @@ import operator
 import re
 import fnmatch
 import math
+from collections import defaultdict
 
 did_regex = re.compile('(\d{6,8})')
 def get_did(filename):
@@ -132,7 +133,8 @@ if __name__ == "__main__":
       # if flag is shown, set batch_mode to true, else false
       ROOT.gROOT.SetBatch(args.batch_mode)
 
-    wdict = {}
+    wdict = defaultdict(dict)
+    default_sample_weights = {'cross section': 1.0, 'filter efficiency': 1.0, 'k-factor': 1.0, 'num events': 1.0}
 
     samplePattern = re.compile(".*:(.*)\.(e\d{4})_.*")
     with open(args.inputDAODs, 'r') as f:
@@ -149,6 +151,9 @@ if __name__ == "__main__":
           did = get_did(sample)
           gen_tag = get_generator_tag(sample)
           logger.info("\tDID: {0:s}\n\tGen: {1:s}".format(did, gen_tag))
+          # initialize dictionary
+          wdict[did][gen_tag] = {'cross section': 1.0, 'filter efficiency': 1.0, 'k-factor': 1.0, 'num events': 1.0}
+          # generate the corresponding EVNT sample name
           matches = samplePattern.search(sample)
           if matches is None:
             logger.error("\tCould not parse {0:s}. Skipping it.".format(sample))
@@ -160,6 +165,12 @@ if __name__ == "__main__":
           #pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
           avgXSec, avgFiltEff = get_info(evnt_file_name)
           logger.info("\tavg. xsec = {0:0.6f} pb\n\tavg. filter eff = {1:0.6f}".format((avgXSec*1000), avgFiltEff))
+          # fill it in
+          wdict[did][gen_tag]['cross section'] = avgXSec*1000
+          wdict[did][gen_tag]['filter efficiency'] = avgFiltEff
+
+    with open('weights.json', 'w+') as f:
+      f.write(json.dumps(wdict, sort_keys=True, indent=4))
 
     if not args.debug:
       ROOT.gROOT.ProcessLine("gSystem->RedirectOutput(0);")
