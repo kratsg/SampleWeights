@@ -140,6 +140,7 @@ if __name__ == "__main__":
     with open(args.inputDAODs, 'r') as f:
       for line in f:
         if line.startswith('#'): continue
+        if line.rstrip() == '': continue
         try:
           res = subprocess.check_output(['dq2-ls', line.rstrip()]).split()
         except subprocess.CalledProcessError:
@@ -169,7 +170,7 @@ if __name__ == "__main__":
           wdict[did][gen_tag]['cross section'] = avgXSec*1000
           wdict[did][gen_tag]['filter efficiency'] = avgFiltEff
 
-    with open('weights.json', 'w+') as f:
+    with open('{0:s}.json'.format(args.inputDAODs.split('.')[0]), 'w+') as f:
       f.write(json.dumps(wdict, sort_keys=True, indent=4))
 
     if not args.debug:
