@@ -168,7 +168,12 @@ if __name__ == "__main__":
           logger.info("\tEVNT file: {0:s}".format(evnt_file_name))
           # search for EVNT file
           #pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
-          avgXSec, avgFiltEff = get_info(evnt_file_name)
+          try:
+            avgXSec, avgFiltEff = get_info(evnt_file_name)
+          except:
+            logger.exception("Caught an error with pyami")
+            avgXSec, avgFiltEff = 0.0, 1.0
+
           logger.info("\tavg. xsec = {0:0.6f} pb\n\tavg. filter eff = {1:0.6f}".format((avgXSec*1000), avgFiltEff))
           # fill it in
           wdict[did][gen_tag]['cross section'] = avgXSec*1000
