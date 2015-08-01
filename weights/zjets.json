@@ -1,0 +1,770 @@
+{
+    "361372": {
+        "e3651": {
+            "cross section": 2206.6867549999965, 
+            "filter efficiency": 0.7790895294000014, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361373": {
+        "e3651": {
+            "cross section": 2205.766714166667, 
+            "filter efficiency": 0.14198003403027773, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361374": {
+        "e3651": {
+            "cross section": 2204.8260334666547, 
+            "filter efficiency": 0.08044771841333352, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361375": {
+        "e3651": {
+            "cross section": 75.69907158781015, 
+            "filter efficiency": 0.6478135922278049, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361376": {
+        "e3651": {
+            "cross section": 75.87048047999974, 
+            "filter efficiency": 0.2169724684279997, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361377": {
+        "e3651": {
+            "cross section": 76.47358213279668, 
+            "filter efficiency": 0.13168573259879265, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361378": {
+        "e3651": {
+            "cross section": 11.755294490777873, 
+            "filter efficiency": 0.6137045161186843, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361379": {
+        "e3651": {
+            "cross section": 11.507813275, 
+            "filter efficiency": 0.2477723158675, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361380": {
+        "e3651": {
+            "cross section": 11.661324083333325, 
+            "filter efficiency": 0.15003595219999988, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361381": {
+        "e3741": {
+            "cross section": 0.7884241696958679, 
+            "filter efficiency": 0.5932172802243209, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361382": {
+        "e3741": {
+            "cross section": 0.8468113817552511, 
+            "filter efficiency": 0.26208874931477033, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361383": {
+        "e3741": {
+            "cross section": 0.8636122230088283, 
+            "filter efficiency": 0.15911567870226104, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361384": {
+        "e3741": {
+            "cross section": 0.051808223000000014, 
+            "filter efficiency": 0.5971711735000002, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361385": {
+        "e3741": {
+            "cross section": 0.05376290093186371, 
+            "filter efficiency": 0.2577468528957914, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361386": {
+        "e3741": {
+            "cross section": 0.056362006652956306, 
+            "filter efficiency": 0.19299421264854846, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361387": {
+        "e3741": {
+            "cross section": 0.010377498097165986, 
+            "filter efficiency": 0.5483343987854253, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361388": {
+        "e3741": {
+            "cross section": 0.01006385997194389, 
+            "filter efficiency": 0.3054852509599197, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361389": {
+        "e3741": {
+            "cross section": 0.010301069231237331, 
+            "filter efficiency": 0.19252180258664314, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361390": {
+        "e3741": {
+            "cross section": 0.0013559944228915656, 
+            "filter efficiency": 0.49003918248995965, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361391": {
+        "e3741": {
+            "cross section": 0.0014825024946236557, 
+            "filter efficiency": 0.2983980919784946, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361392": {
+        "e3741": {
+            "cross section": 0.0013406936349999996, 
+            "filter efficiency": 0.22814047763304987, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361393": {
+        "e3741": {
+            "cross section": 6.131677519045103e-06, 
+            "filter efficiency": 0.5429290415510206, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361394": {
+        "e3741": {
+            "cross section": 7.768919790042053e-06, 
+            "filter efficiency": -9061569416498.885, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361395": {
+        "e3741": {
+            "cross section": 9.36032587953297e-06, 
+            "filter efficiency": -7036875000003.568, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361396": {
+        "e3651": {
+            "cross section": 2205.694059059055, 
+            "filter efficiency": 0.7785135285285302, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361397": {
+        "e3651": {
+            "cross section": 2205.477830555553, 
+            "filter efficiency": 0.14205084221666675, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361398": {
+        "e3651": {
+            "cross section": 2202.840457887692, 
+            "filter efficiency": 0.07964695836799947, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361399": {
+        "e3651": {
+            "cross section": 75.88923126666657, 
+            "filter efficiency": 0.648690449699999, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361400": {
+        "e3651": {
+            "cross section": 76.17898834405149, 
+            "filter efficiency": 0.22059912111334418, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361401": {
+        "e3651": {
+            "cross section": 75.95678781656615, 
+            "filter efficiency": 0.13181789538320007, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361402": {
+        "e3651": {
+            "cross section": 11.62078157498812, 
+            "filter efficiency": 0.6108275229600003, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361403": {
+        "e3651": {
+            "cross section": 11.623428472222221, 
+            "filter efficiency": 0.2435852729797983, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361404": {
+        "e3651": {
+            "cross section": 11.67535815124917, 
+            "filter efficiency": 0.14872959465000035, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361405": {
+        "e3741": {
+            "cross section": 0.8631504317000008, 
+            "filter efficiency": 0.5812619202000001, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361406": {
+        "e3741": {
+            "cross section": 0.8672116926770728, 
+            "filter efficiency": 0.286393930707723, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361407": {
+        "e3741": {
+            "cross section": 0.8629875287999998, 
+            "filter efficiency": 0.16619841110820666, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361408": {
+        "e3741": {
+            "cross section": 0.054433783500000006, 
+            "filter efficiency": 0.5712037162999999, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361409": {
+        "e3741": {
+            "cross section": 0.0562311884, 
+            "filter efficiency": 0.27412495924599967, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361410": {
+        "e3741": {
+            "cross section": 0.05495623080603014, 
+            "filter efficiency": 0.1492894559798995, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361411": {
+        "e3741": {
+            "cross section": 0.00840730414, 
+            "filter efficiency": 0.5052615564400003, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361412": {
+        "e3741": {
+            "cross section": 0.009859422565656565, 
+            "filter efficiency": 0.29778599365656594, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361413": {
+        "e3741": {
+            "cross section": 0.010204487565146393, 
+            "filter efficiency": 0.3758925046769564, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361414": {
+        "e3741": {
+            "cross section": 0.0012484063719616517, 
+            "filter efficiency": 0.4957275402008031, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361415": {
+        "e3741": {
+            "cross section": 0.0013946225204081635, 
+            "filter efficiency": 0.2966702202040817, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361416": {
+        "e3741": {
+            "cross section": 0.0014080804340223, 
+            "filter efficiency": 0.2812297067999999, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361417": {
+        "e3741": {
+            "cross section": 6.674452244186044e-06, 
+            "filter efficiency": 0.609668308488372, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361418": {
+        "e3741": {
+            "cross section": 6.780721179015289e-06, 
+            "filter efficiency": -15.517719209970828, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361419": {
+        "e3741": {
+            "cross section": 1.296842100722394e-05, 
+            "filter efficiency": -35632194014447.984, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361420": {
+        "e3733": {
+            "cross section": 2196.460849, 
+            "filter efficiency": 0.7799274160000013, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361421": {
+        "e3733": {
+            "cross section": 2204.082192275635, 
+            "filter efficiency": 0.1424896861961657, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361422": {
+        "e3733": {
+            "cross section": 2205.0841573333328, 
+            "filter efficiency": 0.07954065610853303, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361423": {
+        "e3733": {
+            "cross section": 76.32204173333326, 
+            "filter efficiency": 0.6496442602066672, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361424": {
+        "e3733": {
+            "cross section": 76.00422886837863, 
+            "filter efficiency": 0.21848454960272864, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361425": {
+        "e3733": {
+            "cross section": 76.36873504025779, 
+            "filter efficiency": 0.1276536106924315, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361426": {
+        "e3733": {
+            "cross section": 11.532317638110461, 
+            "filter efficiency": 0.6159104975980783, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361427": {
+        "e3733": {
+            "cross section": 11.648804813064652, 
+            "filter efficiency": 0.24375567459595945, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361428": {
+        "e3733": {
+            "cross section": 11.61202818006176, 
+            "filter efficiency": 0.14427309070116862, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361429": {
+        "e3741": {
+            "cross section": 0.8697284129999999, 
+            "filter efficiency": 0.5846019502000006, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361430": {
+        "e3741": {
+            "cross section": 0.870199387394959, 
+            "filter efficiency": 0.2629155867181266, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361431": {
+        "e3741": {
+            "cross section": 0.875138589333331, 
+            "filter efficiency": 0.16285940872399995, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361432": {
+        "e3741": {
+            "cross section": 0.05580639520665096, 
+            "filter efficiency": 0.5706016459999996, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361433": {
+        "e3741": {
+            "cross section": 0.05507492197360345, 
+            "filter efficiency": 0.26634284915430845, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361434": {
+        "e3741": {
+            "cross section": 0.05514674930966059, 
+            "filter efficiency": 0.1766692544701702, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361435": {
+        "e3741": {
+            "cross section": 0.009514261566265064, 
+            "filter efficiency": 0.5516759495983931, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361436": {
+        "e3741": {
+            "cross section": 0.00987396766609958, 
+            "filter efficiency": 0.3284275397746478, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361437": {
+        "e3741": {
+            "cross section": 0.010476868799806428, 
+            "filter efficiency": 0.1982866373703111, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361438": {
+        "e3741": {
+            "cross section": 0.0013543766449392713, 
+            "filter efficiency": 0.5805361789068821, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361439": {
+        "e3741": {
+            "cross section": 0.001260929282828283, 
+            "filter efficiency": 0.31457312030303025, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361440": {
+        "e3741": {
+            "cross section": 0.0013548867700507612, 
+            "filter efficiency": 0.08972185260862939, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361441": {
+        "e3741": {
+            "cross section": 6.113281773e-06, 
+            "filter efficiency": 0.6966834065, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361442": {
+        "e3741": {
+            "cross section": 6.497915034359373e-06, 
+            "filter efficiency": 0.27277144530965786, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361443": {
+        "e3741": {
+            "cross section": 9.757190725572319e-06, 
+            "filter efficiency": 2.8538009094792343, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361444": {
+        "e3651": {
+            "cross section": 11937.019376566142, 
+            "filter efficiency": 0.7790474901272906, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361445": {
+        "e3651": {
+            "cross section": 11935.92286914763, 
+            "filter efficiency": 0.13913544492196803, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361446": {
+        "e3651": {
+            "cross section": 11945.761293388088, 
+            "filter efficiency": 0.08019614420716212, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361447": {
+        "e3651": {
+            "cross section": 427.94374083333366, 
+            "filter efficiency": 0.6417990093999991, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361448": {
+        "e3651": {
+            "cross section": 428.18749384543537, 
+            "filter efficiency": 0.2197379928280331, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361449": {
+        "e3651": {
+            "cross section": 428.68488693029525, 
+            "filter efficiency": 0.13215480008029493, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361450": {
+        "e3651": {
+            "cross section": 65.91265653691298, 
+            "filter efficiency": 0.6139872469731575, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361451": {
+        "e3651": {
+            "cross section": 65.63853580154401, 
+            "filter efficiency": 0.23744810693460425, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361452": {
+        "e3651": {
+            "cross section": 65.85228276170069, 
+            "filter efficiency": 0.14982779666988172, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361453": {
+        "e3741": {
+            "cross section": 4.8454005375, 
+            "filter efficiency": 0.5796072143309984, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361454": {
+        "e3741": {
+            "cross section": 4.813010379999996, 
+            "filter efficiency": 0.2640708962700002, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361455": {
+        "e3741": {
+            "cross section": 4.868797924294007, 
+            "filter efficiency": 0.1681981654375522, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361456": {
+        "e3741": {
+            "cross section": 0.29451778, 
+            "filter efficiency": 0.5556424385000001, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361457": {
+        "e3741": {
+            "cross section": 0.3049562856666666, 
+            "filter efficiency": 0.284682937623333, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361458": {
+        "e3741": {
+            "cross section": 0.29982721260000006, 
+            "filter efficiency": 0.1819479106140002, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361459": {
+        "e3741": {
+            "cross section": 0.05206515799999999, 
+            "filter efficiency": 0.571133863, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361460": {
+        "e3741": {
+            "cross section": 0.05431509440000003, 
+            "filter efficiency": 0.302526112292, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361461": {
+        "e3741": {
+            "cross section": 0.0561048382, 
+            "filter efficiency": 0.19734789790799992, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361462": {
+        "e3741": {
+            "cross section": 0.006135099403999998, 
+            "filter efficiency": 0.4965343947599995, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361463": {
+        "e3741": {
+            "cross section": 0.007845937755102042, 
+            "filter efficiency": 0.34561092418367373, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361464": {
+        "e3741": {
+            "cross section": 0.008110750311557795, 
+            "filter efficiency": 0.2071382287844221, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361465": {
+        "e3741": {
+            "cross section": 3.341239559999999e-05, 
+            "filter efficiency": 0.4395749657699999, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361466": {
+        "e3741": {
+            "cross section": 3.301186297809918e-05, 
+            "filter efficiency": -0.198133083362397, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }, 
+    "361467": {
+        "e3741": {
+            "cross section": 3.4881339073770486e-05, 
+            "filter efficiency": -36914749999999.734, 
+            "k-factor": 1.0, 
+            "num events": 1.0
+        }
+    }
+}
