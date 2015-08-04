@@ -20,7 +20,7 @@ def write_new_weights(filename):
       weights[k][tag]['num events]'] = 0
 
   with open('new_'+filename,'w+') as outfile:
-    outfile.write(yaml.dump(weights))
+    outfile.write(yaml.dump(weights,default_flow_style=False))
   outfile.close()
 
 write_new_weights('gtt.json')
