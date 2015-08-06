@@ -20,7 +20,7 @@ def write_new_weights(sample):
     except:
       weights[k][tag]['num events'] = 0
 
-  with open('new_'+sample+'.yml','w+') as outfile:
+  with open(sample+'.yml','w+') as outfile:
     outfile.write(yaml.dump(weights,default_flow_style=False))
   outfile.close()
 
