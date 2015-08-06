@@ -1,0 +1,18 @@
+'407012':
+  e4023:
+    cross section: 696.2187196495626
+    filter efficiency: 0.00922237607759699
+    k-factor: 1.0
+    num events: '2.51763415'
+'410000':
+  e3698:
+    cross section: 696.1470767202361
+    filter efficiency: 0.5441262081845021
+    k-factor: 1.0
+    num events: '19548779.0'
+'410008':
+  e3964:
+    cross section: 694.4389002036677
+    filter efficiency: 0.45617073034623173
+    k-factor: 1.0
+    num events: 0
