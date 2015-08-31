@@ -1,3 +1,9 @@
+# OUTDATED
+
+This is slowly being deprecated. https://github.com/kratsg/TheAccountant/#getweightspy contains current instructions for generating an appropriate `weights.json` file now.
+
+# Instructions
+
 To set up,
 
 ```
