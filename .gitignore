@@ -1,0 +1,5 @@
+*.pyc
+RootCoreBin
+rcSetup.csh
+rcSetup.sh
+.RootCoreBin
