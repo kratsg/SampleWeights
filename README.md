@@ -21,10 +21,16 @@ voms-proxy-init -voms atlas
 rcSetup Base,2.X.Y
 ```
 
-Use me.
+Understand me.
 
 ```
 python weights.py -h
+```
+
+Use me.
+
+```
+python weights.py inputSamples/dijets.list --inputGrid --inputList --config counter_MBJ.py
 ```
 
 ## Counter Config File
