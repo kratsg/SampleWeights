@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 # @file:    weights.py
-# @purpose: generate the appropriate weights.yml file
+# @purpose: generate the appropriate weights.json file
 # @author:  Giordon Stark <gstark@cern.ch>
-# @date:    July 2015
+# @date:    August 2016
 #
 
 # __future__ imports must occur at beginning of file
@@ -26,7 +26,6 @@ root_logger.addHandler(logging.StreamHandler(STDOUT))
 logger = logging.getLogger("weights")
 logger.setLevel(20)
 
-
 if not sys.version_info[:2] == (2, 7):
   logger.error("You must use python 2.7.")
   sys.exit(0)
@@ -41,14 +40,17 @@ import operator
 import re
 import fnmatch
 import math
+from operator import itemgetter
+import time
+import itertools
 from collections import defaultdict
 
-did_regex = re.compile('(\d{6,8})')
+did_regex = re.compile('\.?(?:00)?(\d{6,8})\.?')
 def get_did(filename):
+  global did_regex
   m = did_regex.search(filename)
-  if m is None:
-    raise ValueError("{0:s} is not a valid filename. Could not get did.".format(filename))
-  return m.groups()[0]
+  if m is None: raise ValueError('Can\'t figure out the DID! Filename: {0:s}'.format(filename))
+  return m.group(1)
 
 generatorTag_regex = re.compile('\.?(e\d{4})_?')
 def get_generator_tag(filename):
@@ -57,25 +59,24 @@ def get_generator_tag(filename):
     raise ValueError("{0:s} is not a valid filename. Could not get generator tag.".format(filename))
   return m.groups()[0]
 
-def get_info(pattern, fields='files.cross_section,files.gen_filt_eff,nfiles'):
-  global api
-  resDict = api.list_datasets(client, patterns = pattern, fields = fields)
+def get_info(client, filename):
+  # get the responses
+  response = client.execute(['GetPhysicsParamsForDataset',"--logicalDatasetName=%s"%evnt_file_name], format='dict_object')
+  # format this into dictionaries
+  response = sorted(response.get_rows(), key=lambda item: time.mktime(time.strptime(item['insert_time'], '%Y-%m-%d %H:%M:%S')))
+  results = {}
 
-  # loop over files in dataset, calculate avg filter efficiency
-  numFiles = 0
-  avgFiltEff = 0.0
-  avgXSec = 0.0
-  for results in resDict:
-    numFiles = (float)(results['nfiles'])
-    if (results['files_gen_filt_eff'] != 'NULL'): avgFiltEff += (float) (results['files_gen_filt_eff'])
-    if (results['files_cross_section'] != 'NULL'): avgXSec += (float) (results['files_cross_section'])
-    pass # end loop over files
+  for physics_param, items in itertools.groupby(response, key=itemgetter('paramName')):
+    for item in items:
+      results[physics_param] = item['paramValue']
+      # only want the first item
+      break
 
-  if(numFiles != 0):
-    avgFiltEff = avgFiltEff/numFiles
-    avgXSec = avgXSec/numFiles
+  results['cross section'] = float(results.pop('crossSection'))
+  results['filter efficiency'] = float(results.pop('genFiltEff'))
+  results['k-factor'] = float(results.pop('kFactor'))
 
-  return avgXSec, avgFiltEff
+  return results
 
 if __name__ == "__main__":
   class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter):
@@ -112,7 +113,7 @@ if __name__ == "__main__":
     import pyAMI.client
     import pyAMI.atlas.api as api
   except ImportError:
-    logger.exception("You must set up PyAMI first. localSetupPyAMI will do the trick. Make sure you have a valid certificate (voms-proxy-init -voms atlas) or run `ami auth` to log in.")
+    logger.exception("You must set up PyAMI first. lsetup pyami will do the trick. Make sure you have a valid certificate (voms-proxy-init -voms atlas) or run `ami auth` to log in.")
     sys.exit(0)
 
   # INIT ATLAS API
@@ -125,8 +126,8 @@ if __name__ == "__main__":
     import timing
 
     # set verbosity for python printing
-    if args.verbose < 5:
-      logger.setLevel(25 - args.verbose*5)
+    if args.verbose < 4:
+      logger.setLevel(20 - args.verbose*5)
     else:
       logger.setLevel(logging.NOTSET + 1)
 
@@ -137,8 +138,7 @@ if __name__ == "__main__":
       # if flag is shown, set batch_mode to true, else false
       ROOT.gROOT.SetBatch(args.batch_mode)
 
-    wdict = defaultdict(dict)
-    default_sample_weights = {'cross section': 1.0, 'filter efficiency': 1.0, 'k-factor': 1.0, 'num events': 1.0}
+    wdict = defaultdict(lambda: {'cross section': 1.0, 'filter efficiency': 1.0, 'k-factor': 1.0, 'rel uncert': 1.0, 'num events': 1.0})
 
     samplePattern = re.compile(".*:(.*)\.(e\d{4})_.*")
     with open(args.inputDAODs, 'r') as f:
@@ -146,18 +146,19 @@ if __name__ == "__main__":
         if line.startswith('#'): continue
         if line.rstrip() == '': continue
         try:
-          res = subprocess.check_output(['dq2-ls', line.rstrip()]).split()
-        except subprocess.CalledProcessError:
-          logger.exception("dq2 is probably not set up. We use it to find your files (using patterns) before using pyami")
+          res = subprocess.check_output(['rucio','list-dids','--short', line.rstrip()]).split()
+        except:
+          logger.exception("rucio is probably not set up. We use it to find your files (using patterns) before using pyami")
           sys.exit(0)
 
         for sample in res:
+          # clean it up
+          sample = sample.strip()
+
           logger.info("Processing: {0:s}".format(sample))
           did = get_did(sample)
           gen_tag = get_generator_tag(sample)
           logger.info("\tDID: {0:s}\n\tGen: {1:s}".format(did, gen_tag))
-          # initialize dictionary
-          wdict[did][gen_tag] = {'cross section': 1.0, 'filter efficiency': 1.0, 'k-factor': 1.0, 'num events': 1.0}
           # generate the corresponding EVNT sample name
           matches = samplePattern.search(sample)
           if matches is None:
@@ -168,16 +169,10 @@ if __name__ == "__main__":
           logger.info("\tEVNT file: {0:s}".format(evnt_file_name))
           # search for EVNT file
           #pattern = 'mc15_13TeV.410008.aMcAtNloHerwigppEvtGen_ttbar_allhad.evgen.EVNT.e3964'
-          try:
-            avgXSec, avgFiltEff = get_info(evnt_file_name)
-          except:
-            logger.exception("Caught an error with pyami")
-            avgXSec, avgFiltEff = 0.0, 1.0
+          dataset_info = get_info(client, evnt_file_name)
+          wdict[did].update(dataset_info)
 
-          logger.info("\tavg. xsec = {0:0.6f} pb\n\tavg. filter eff = {1:0.6f}".format((avgXSec*1000), avgFiltEff))
-          # fill it in
-          wdict[did][gen_tag]['cross section'] = avgXSec*1000
-          wdict[did][gen_tag]['filter efficiency'] = avgFiltEff
+          logger.info(wdict[did])
 
     if not os.path.exists('weights'):
       os.makedirs('weights')
