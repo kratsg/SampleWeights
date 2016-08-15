@@ -82,12 +82,14 @@ if __name__ == "__main__":
 
   # pass in the filename, get a cutflow number
   def get_cutflow(fname, numErrors=0):
+    global args
     if numErrors > 3:
       return fname
     try:
+      configLocals  = {}
+      execfile(args.config, {}, configLocals)
       f = ROOT.TFile.Open(fname, "READ")
-      cutflow = f.Get("cut_flow")
-      count = cutflow.GetBinContent(2)
+      count = configLocals['counter'](f)
       f.Close()
       return count
     except:
@@ -111,6 +113,8 @@ if __name__ == "__main__":
 
   # positional argument, require the first argument to be the input filename
   parser.add_argument('files', type=str, nargs='+', help='input file(s) to read')
+  parser.add_argument('--config', metavar='', type=str, required=True, help='configuration for the cutflow computation. See counter_MBJ.py for example')
+
   parser.add_argument('-o', '--output', dest='output_filename', metavar='file', type=str, help='Output filename', default='weights.json')
   parser.add_argument('-f', '--force', dest='force_overwrite', action='store_true', help='Overwrite previous output if it exists.')
   parser.add_argument('--version', action='version', version='%(prog)s {version}'.format(version=__version__))
