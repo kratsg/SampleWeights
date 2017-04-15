@@ -121,6 +121,7 @@ if __name__ == "__main__":
 
   parser.add_argument('--inputList', dest='use_inputFileList', action='store_true', help='If enabled, will read in a text file containing a list of files.')
   parser.add_argument('--inputGrid', dest='use_addGrid', action='store_true', help='If enabled, will search using DQ2. Can be combined with `--inputList`.')
+  parser.add_argument('--flat-layout', action='store_true', help='Enable if you have a flatter sample layout, where the sample is a file and not a directorty.')
   parser.add_argument('-v', '--verbose', dest='verbose', action='count', default=0, help='Enable verbose output of various levels. Default: no verbosity')
   parser.add_argument('-y', '--yes', dest='skip_confirm', action='count', default=0, help='Skip the configuration confirmations. Useful for when running in the background.')
 
@@ -234,8 +235,9 @@ if __name__ == "__main__":
     # if there is any sort of error with the file, retry up to 3 times
     #   before just completely erroring out
     samplePattern = re.compile(".*:(.*)\.(e\d{4})_.*")
-    def get_sample_info(sample):
+    def get_sample_info(fargs):
       global samplePattern
+      sample, flat_layout = fargs
       weight = {'num events': 0.0,
                 'errors': [],
                 'cross section': -1.0,
@@ -243,9 +245,14 @@ if __name__ == "__main__":
                 'k-factor': -1.0,
                 'rel uncert': -1.0}
 
-      getWeights_logger.info("Processing: {0:s}".format(sample.name()))
-      did = get_did(sample.name())
-      gen_tag = get_generator_tag(sample.name())
+      if flat_layout:
+        sampleName = os.path.basename(sample.fileName(0))
+      else:
+        sampleName = sample.name()
+
+      getWeights_logger.info("Processing: {0:s}".format(sampleName))
+      did = get_did(sampleName)
+      gen_tag = get_generator_tag(sampleName)
       getWeights_logger.info("\tDID: {0:s}\n\tGen: {1:s}".format(did, gen_tag))
       # find the corresponding EVNT sample name
       res = api.list_datasets(client,  patterns='{0:s}.{1:s}.%.evgen.EVNT.{2:s}'.format('mc15_13TeV',did, gen_tag))
@@ -276,7 +283,7 @@ if __name__ == "__main__":
 
     getWeights_logger.info("spinning up {0:d} processes".format(num_procs))
 
-    for res in pool.imap_unordered(get_sample_info, sh_all):
+    for res in pool.imap_unordered(get_sample_info, zip(sh_all, [args.flat_layout]*len(sh_all))):
       weights.update(dict((res,)))
 
       with open(args.output_filename, 'w+') as f:
